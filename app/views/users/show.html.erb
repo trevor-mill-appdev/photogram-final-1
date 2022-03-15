@@ -10,6 +10,11 @@
 
   <dt>Following</dt>
   <dd><!-- No of followees --></dd>
+
+  <% if @current_user == @the_user %>
+    <dt>Edit user</dt>
+    <dd>Form goes here</dd>
+  <% end %>
 </dl>
 
 <ul>
@@ -43,10 +48,15 @@
         <%= a_post.caption %>
       </td>
       <td>
-        <%= a_post.created_at.strftime("%B %e, %Y") %>
+        <%= time_ago_in_words(a_post.created_at) + " ago" %>
       </td>
       <td>
         <%= a_post.likes_count %>
+      </td>
+      <td>
+        <a href="/photos/<%= a_post.id %>">
+          Show details
+        </a>
       </td>
 
     </tr>
