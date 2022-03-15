@@ -15,4 +15,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def index
+    matching_users = User.all
+
+    @list_of_users = matching_users.order({ :username => :asc })
+    render({ :template => "users/index.html.erb" })
+  end
+
+  def show_user
+    url_username = params.fetch("username")
+    matching_usernames = User.where({ :username => url_username })
+
+    @the_user = matching_usernames.first
+    render({ :template => "users/show.html.erb" })
+  end
+
 end

@@ -1,0 +1,54 @@
+<h1><%= @the_user.username %></h1>
+
+<dl>
+  <dt>Private</dt>
+  <dd><%= @the_user.private %></dd>
+
+  <dt>Followers</dt>
+  <dd><!-- Number of followers --></dd>
+  <dd><!-- Follow or unfollow link --></dd>
+
+  <dt>Following</dt>
+  <dd><!-- No of followees --></dd>
+</dl>
+
+<ul>
+  <li>Profile</li>
+  <li>Liked photos</li>
+  <li>Feed</li>
+  <li>Discover</li>
+</ul>
+
+<h2>Own photos (<%= @the_user.posts.count %>)</h2>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Owner</th>
+    <th>Caption</th>
+    <th>Posted</th>
+    <th>Likes</th>
+    <th> </th>
+  </tr>
+
+  <% @the_user.posts.each do |a_post| %>
+    <tr>
+      <td>
+        Image goes here
+      </td>
+      <td>
+        <%= a_post.owner.username %>
+      </td>
+      <td>
+        <%= a_post.caption %>
+      </td>
+      <td>
+        <%= a_post.created_at.strftime("%B %e, %Y") %>
+      </td>
+      <td>
+        <%= a_post.likes_count %>
+      </td>
+
+    </tr>
+  <% end %>
+</table>
