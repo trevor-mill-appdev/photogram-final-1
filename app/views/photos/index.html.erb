@@ -3,19 +3,16 @@
 <hr>
 
 <!-- below is a good form for adding photos -->
-<!--<form action="/insert_photo">
+<form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
   <label for="image_box">Image</label>
-  <input id="image_box" name="query_image">
+  <input type="file" id="image" name="image" class="form-control">
 
   <label for="caption_box">Caption</label>
   <textarea id="caption_box" name="query_caption"></textarea>
 
-  <label for="owner_id_box">Owner ID</label>
-  <input id="owner_id_box" name="query_owner_id">
-
   <button>Add photo</button>
 
-</form>-->
+</form>
 
 <hr>
 
@@ -32,7 +29,7 @@
   <% @public_photos.each do |a_photo| %>
   <tr>
     <td>
-      <img src="<%= a_photo.image %>">
+      <img src="<%= a_photo.image %>" class="img-responsive">
     </td>
     <td><%= a_photo.caption %></td>
     <td><%= a_photo.owner.username %></td>

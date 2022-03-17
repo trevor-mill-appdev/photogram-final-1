@@ -3,20 +3,11 @@ class PhotosController < ApplicationController
     matching_photos = Photo.all
 
     list_of_photos = matching_photos.order({ :created_at => :desc })
-
-    matching_users = User.all
-    public_users = Array.new
-
-    matching_users.each do |a_user|
-      if a_user.private == false
-        public_users.push(a_user)
-      end
-    end
     
     @public_photos = Array.new
 
     list_of_photos.each do |a_photo|
-      if public_users.include? a_photo.owner
+      if a_photo.owner.private == false
         @public_photos.push(a_photo)
       end
     end
@@ -37,10 +28,10 @@ class PhotosController < ApplicationController
   def create
     the_photo = Photo.new
     the_photo.caption = params.fetch("query_caption")
-    the_photo.image = params.fetch("query_image")
-    the_photo.owner_id = params.fetch("query_owner_id")
-    the_photo.likes_count = params.fetch("query_likes_count")
-    the_photo.comments_count = params.fetch("query_comments_count")
+    the_photo.image = params.fetch("image")
+    the_photo.owner_id = @current_user.id
+    the_photo.likes_count = 0
+    the_photo.comments_count = 0
 
     if the_photo.valid?
       the_photo.save
