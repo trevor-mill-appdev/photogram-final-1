@@ -30,4 +30,9 @@ class ApplicationController < ActionController::Base
     render({ :template => "users/show.html.erb" })
   end
 
+  def test
+
+    render({ :template => "/test.html.erb"})
+  end
+
 end
