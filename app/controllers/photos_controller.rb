@@ -2,7 +2,24 @@ class PhotosController < ApplicationController
   def index
     matching_photos = Photo.all
 
-    @list_of_photos = matching_photos.order({ :created_at => :desc })
+    list_of_photos = matching_photos.order({ :created_at => :desc })
+
+    matching_users = User.all
+    public_users = Array.new
+
+    matching_users.each do |a_user|
+      if a_user.private == false
+        public_users.push(a_user)
+      end
+    end
+    
+    @public_photos = Array.new
+
+    list_of_photos.each do |a_photo|
+      if public_users.include? a_photo.owner
+        @public_photos.push(a_photo)
+      end
+    end
 
     render({ :template => "photos/index.html.erb" })
   end
