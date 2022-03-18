@@ -18,14 +18,14 @@ class FollowRequestsController < ApplicationController
   end
 
   def create
-    @the_follow_request = FollowRequest.new
-    @the_follow_request.recipient_id = params.fetch("query_recipient_id")
-    @the_follow_request.sender_id = @current_user.id
-    @the_follow_request.status = "Pending"
-    @the_follow_request.save
+    the_follow_request = FollowRequest.new
+    the_follow_request.recipient_id = params.fetch("query_recipient_id")
+    the_follow_request.sender_id = @current_user.id
+    the_follow_request.status = "Pending"
+    the_follow_request.save
 
-    sender = User.where({ :id => @the_follow_request.sender_id }).at(0)
-    redirect_to("/users/<%= sender.username %>")
+    recipient = User.where({ :id => the_follow_request.recipient_id }).at(0)
+    redirect_to("/users/#{recipient.username}", { :notice => "Follow request sent." })
   end
 
   def update
