@@ -23,11 +23,17 @@ class ApplicationController < ActionController::Base
   end
 
   def show_user
+    
+
     url_username = params.fetch("username")
     matching_usernames = User.where({ :username => url_username })
 
     @the_user = matching_usernames.first
-    render({ :template => "users/show.html.erb" })
+    if @current_user != nil
+      render({ :template => "users/show.html.erb" })
+    else
+      redirect_to("/user_sign_in", { :alert => "You have to sign in first." })
+    end
   end
 
   def test
