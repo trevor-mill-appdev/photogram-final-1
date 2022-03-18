@@ -10,7 +10,9 @@
 #  sender_id    :integer
 #
 class FollowRequest < ApplicationRecord
-
+  validates(:recipient_id, { :presence => true })
+  validates(:sender_id, { :presence => true })
+  
   belongs_to(:recipient, { :required => true, :class_name => "User", :foreign_key => "recipient_id" })
 
   belongs_to(:sender, { :required => true, :class_name => "User", :foreign_key => "sender_id" })

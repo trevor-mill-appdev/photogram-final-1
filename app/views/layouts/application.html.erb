@@ -28,57 +28,57 @@
   </style>
 </head>
 
-
-<body>
-  <% if @current_user != nil %>
-    <ul>
-      <li>
-        <a href="/users">
-          All users
-        </a>
-      </li>
-      <li>
-        <a href="/photos">
-          All public photos
-        </a>
-      </li>
-      <li>
-        <a href="/edit_user_profile">
-          <%= @current_user.username %>
-        </a>
-      </li>
-      <li>
-        <a href="/user_sign_out">
-          Sign out
-        </a>
-      </li>
-    </ul>
-  <% else %>
-    <ul>
-      <li>
-        <a href="/users">
-          All users
-        </a>
-      </li>
-      <li>
-        <a href="/photos">
-          All public photos
-        </a>
-      </li>
-      <li>
-        <a href="/user_sign_in">
-          Sign in
-        </a>
-      </li>
-      <li>
-        <a href="/user_sign_up">
-          Sign up
-        </a>
-      </li>
-    </ul>
-  <% end %>
-</body>
-  
+<div class="container">
+  <body>
+    <% if @current_user != nil %>
+      <ul>
+        <li>
+          <a href="/users">
+            All users
+          </a>
+        </li>
+        <li>
+          <a href="/photos">
+            All public photos
+          </a>
+        </li>
+        <li>
+          <a href="/edit_user_profile">
+            <%= @current_user.username %>
+          </a>
+        </li>
+        <li>
+          <a href="/user_sign_out">
+            Sign out
+          </a>
+        </li>
+      </ul>
+    <% else %>
+      <ul>
+        <li>
+          <a href="/users">
+            All users
+          </a>
+        </li>
+        <li>
+          <a href="/photos">
+            All public photos
+          </a>
+        </li>
+        <li>
+          <a href="/user_sign_in">
+            Sign in
+          </a>
+        </li>
+        <li>
+          <a href="/user_sign_up">
+            Sign up
+          </a>
+        </li>
+      </ul>
+    <% end %>
+  </body>
+</div>
 
   <div class="container">
     <%= render "shared/flashes" %>
