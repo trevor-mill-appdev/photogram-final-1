@@ -19,6 +19,23 @@ class ApplicationController < ActionController::Base
     matching_users = User.all
 
     @list_of_users = matching_users.order({ :username => :asc })
+
+    if @current_user != nil
+      user_follow_requests = FollowRequest.where({ :sender_id => @current_user.id })
+      accepted_requests = user_follow_requests.where({ :status => "Accepted" })
+      pending_requests = user_follow_requests.where({ :status => "Pending" })
+      @user_accepted_id = Array.new
+      @user_pending_id = Array.new
+
+      accepted_requests.each do |a_request|
+        @user_accepted_id.push(a_request.recipient_id)
+      end
+
+      pending_requests.each do |another_request|
+        @user_pending_id.push(another_request.recipient_id)
+      end
+
+    end
     render({ :template => "users/index.html.erb" })
   end
 

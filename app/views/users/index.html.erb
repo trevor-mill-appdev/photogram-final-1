@@ -17,6 +17,7 @@
   </tr>
 
   <% @list_of_users.each do |a_user| %>
+  <% @a_user = a_user %>
     <tr>
       <td>
         <%= a_user.username %>
@@ -31,12 +32,20 @@
       <td>
         <!-- this needs to have buttons to follow or links to unfollow -->
         <% if @current_user !=nil %>
-          <form action="/insert_follow_request" method="post">
-            <input type="hidden" id="recipient" name="query_recipient_id" value="<%= a_user.id %>">
-            <button>
-              Follow
-            </button>
-          </form>
+          <% if @a_user.id in @user_accepted_id %>
+            <!-- this will be an unfollow link -->
+            test
+          <% elsif @a_user.id in @user_pending_id %>
+            <!-- Request sent. Cancel link -->
+            test2
+          <% else %>
+            <form action="/insert_follow_request" method="post">
+              <input type="hidden" id="recipient" name="query_recipient_id" value="<%= a_user.id %>">
+              <button>
+                Follow
+              </button>
+            </form>
+          <% end %>
         <% else %>
           <%= %>
         <% end %>
